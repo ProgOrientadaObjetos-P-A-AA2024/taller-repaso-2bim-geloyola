@@ -9,7 +9,7 @@ import java.util.List;
 import paquete02.*;
 import paquete03.*;
 
-/**
+/*
  *
  * @author utpl
  */
@@ -19,35 +19,44 @@ public class Ejecutor {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        ArrayList<Vehiculo> lista = new ArrayList();
         // Crear compradores
-        Comprador comprador1 = new Comprador("Juan Perez", "1234567890");
-        Comprador comprador2 = new Comprador("Ana Gómez", "0987654321");
+        Comprador comprador1 = new Comprador("Andres Cardenas",
+                "1106926583");
+        Comprador comprador2 = new Comprador("Gaby Loyola",
+                "110387254");
 
         // Crear vehículos
-        TipoSedan sedan1 = new TipoSedan(comprador1, "Toyota", 25000, 5);
-        sedan1.calcularPrecioFinal();
+        TipoSedan sedan1 = new TipoSedan(comprador1, "Toyota",
+                32000, 5);
+        sedan1.establecerValorDescuento();
+        sedan1.establecerSeguroAdicional();
+        lista.add(sedan1);
 
-        TipoSedan sedan2 = new TipoSedan(comprador2, "Honda", 30000, 7);
-        sedan2.calcularPrecioFinal();
+        TipoSedan sedan2 = new TipoSedan(comprador2, "ford",
+                20000, 7);
+        sedan2.establecerValorDescuento();
+        sedan2.establecerSeguroAdicional();
+        lista.add(sedan2);
 
-        TipoSuv suv1 = new TipoSuv(comprador1, "Ford", 35000, 10);
-        suv1.calcularPrecioFinal();
+        TipoSuv suv1 = new TipoSuv(comprador2, "Chevrolet",
+                25000, 10);
+        suv1.establecerSeguroPersonas();
+        lista.add(suv1);
 
-        TipoCamioneta camioneta1 = new TipoCamioneta(comprador2, "Chevrolet", 40000, 12);
-        camioneta1.calcularPrecioFinal();
+        TipoCamioneta camio1 = new TipoCamioneta(comprador2,
+                "Maza", 42000, 12);
+        camio1.establecerValorAdicional();
+        camio1.establecerSeguroAdicional();
+        lista.add(camio1);
 
-        List<Vehiculo> listadoVehiculos = new ArrayList<>();
-        listadoVehiculos.add(sedan1);
-        listadoVehiculos.add(sedan2);
-        listadoVehiculos.add(suv1);
-        listadoVehiculos.add(camioneta1);
-
-        Concesionaria concesionaria = new Concesionaria("Concesionaria XYZ", listadoVehiculos);
-
-        System.out.println(concesionaria);
-
-        for (Vehiculo vehiculo : listadoVehiculos) {
-            System.out.println(vehiculo);
+        for (int i = 0; i < lista.size(); i++) {
+            lista.get(i).establecerPrecioFinal();
         }
+        Consecionaria consecio = new Consecionaria(lista, "Daniel");
+        consecio.establecerVentasTotales();
+        consecio.establecerCostoMenor();
+        System.out.println(consecio);
     }
+
 }

@@ -12,27 +12,28 @@ import paquete02.*;
  */
 public class TipoSedan extends Vehiculo {
 
-    private double porcentajeDescuento;
-    private double valorDescuento;
-    private double seguroAdicionalMecanico;
+    private double porcentajeDescuento, valorDescuento, seguroAdicional;
 
-    public TipoSedan(Comprador prop, String marc, double precioB, double porcentajeD) {
-        super(prop, marc, precioB);
-        porcentajeDescuento = porcentajeD;
-        valorDescuento = 0;
-        seguroAdicionalMecanico = precioB * 0.01;
+    public TipoSedan(Comprador prop, String brand, double baseValue, double percent) {
+        super(prop, brand, baseValue);
+        porcentajeDescuento = percent;
     }
 
-    public void establecerPorcentajeDescuento(double porcentajeD) {
-        porcentajeDescuento = porcentajeD;
+    public void establecerPorcentajeDescuento(double x) {
+        porcentajeDescuento = x;
     }
 
-    public void establecerValorDescuento(double valorD) {
-        valorDescuento = valorD;
+    public void establecerValorDescuento() {
+        valorDescuento = precioBase * (porcentajeDescuento / 100);
     }
 
-    public void establecerSeguroAdicionalMecanico(double seguroA) {
-        seguroAdicionalMecanico = seguroA;
+    public void establecerSeguroAdicional() {
+        seguroAdicional = precioBase * 0.01;
+    }
+
+    @Override
+    public void establecerPrecioFinal() {
+        precioFinal = precioBase - valorDescuento + seguroAdicional;
     }
 
     public double obtenerPorcentajeDescuento() {
@@ -43,23 +44,19 @@ public class TipoSedan extends Vehiculo {
         return valorDescuento;
     }
 
-    public double obtenerSeguroAdicionalMecanico() {
-        return seguroAdicionalMecanico;
-    }
-
-    @Override
-    public void calcularPrecioFinal() {
-        valorDescuento = precioBase * (porcentajeDescuento / 100);
-        precioFinal = precioBase - valorDescuento + seguroAdicionalMecanico;
+    public double obtenerSeguroAdicional() {
+        return seguroAdicional;
     }
 
     @Override
     public String toString() {
-        String cadena = super.toString() + String.format("\nPorcentaje Descuento: %.2f%%\nValor Descuento: $%.2f\n"
-                + "Seguro Adicional Mecánico: $%.2f\n",
-                porcentajeDescuento,
-                valorDescuento,
-                seguroAdicionalMecanico);
+        String cadena = String.format("%sPorcentaje descuento: %.2f\n"
+                + "Valor descuento: %.2f\nSeguro adicional: %.2f\n"
+                + "Precio final: %.2f\n", super.toString(),
+                obtenerPorcentajeDescuento(),
+                obtenerValorDescuento(),
+                obtenerSeguroAdicional(),
+                obtenerPrecioFinal());
         return cadena;
     }
 }

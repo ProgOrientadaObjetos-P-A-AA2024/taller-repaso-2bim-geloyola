@@ -12,27 +12,43 @@ import paquete02.*;
  */
 public class TipoSuv extends Vehiculo {
 
-    private double porcentajeSeguroPersonas;
-    private double seguroPersonas;
+    double seguroPersonas, porcentajeAdicional;
 
-    public TipoSuv(Comprador propietario, String marca, double precioBase,
-            double porcentajeSeguroP) {
-        super(propietario, marca, precioBase);
-        porcentajeSeguroPersonas = porcentajeSeguroP;
-        seguroPersonas = 0;
+    public TipoSuv(Comprador prop, String brand, double baseValue,
+            double additionalPercent) {
+        super(prop, brand, baseValue);
+        porcentajeAdicional = additionalPercent;
+    }
+
+    public void establecerSeguroPersonas() {
+        seguroPersonas = precioBase * (porcentajeAdicional / 100);
+    }
+
+    public void establecerPorcentajeAdicional(double x) {
+        porcentajeAdicional = x;
     }
 
     @Override
-    public void calcularPrecioFinal() {
-        seguroPersonas = precioBase * (porcentajeSeguroPersonas / 100);
+    public void establecerPrecioFinal() {
         precioFinal = precioBase + seguroPersonas;
+    }
+
+    public double obtenerSeguroPersonas() {
+        return seguroPersonas;
+    }
+
+    public double obtenerPorcentajeAdicional() {
+        return porcentajeAdicional;
     }
 
     @Override
     public String toString() {
-        String cadena = super.toString() + String.format(""
-                + "\nPorcentaje Seguro Personas: %.2f%%\nSeguro Personas: $%.2f\n",
-                porcentajeSeguroPersonas, seguroPersonas);
+        String cadena = String.format("%sPorcentaje adicional: %.2f\n"
+                + "Seguro personas: %.2f\n"
+                + "Precio final: %.2f\n", super.toString(),
+                obtenerPorcentajeAdicional(),
+                obtenerSeguroPersonas(),
+                obtenerPrecioFinal());
         return cadena;
     }
 }

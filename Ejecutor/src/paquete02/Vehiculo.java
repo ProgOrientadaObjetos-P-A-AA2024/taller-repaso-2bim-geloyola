@@ -12,56 +12,50 @@ import paquete02.Comprador;
 public  abstract class Vehiculo {
      protected Comprador propietario;
     protected String marca;
-    protected double precioBase;
-    protected double precioFinal;
+    protected double precioBase, precioFinal;
 
-    public Vehiculo(Comprador prop, String mar, double precioB) {
+    public Vehiculo(Comprador prop, String brand, double baseValue) {
         propietario = prop;
-        marca = mar;
-        precioBase = precioB;
-        precioFinal = 0;
+        marca = brand;
+        precioBase = baseValue;
     }
+
+    public void establecerPropietario(Comprador x) {
+        propietario = x;
+    }
+
+    public void establecerMarca(String x) {
+        marca = x;
+    }
+
+    public void establecerPrecioBase(double x) {
+        precioBase = x;
+    }
+
+    public abstract void establecerPrecioFinal();
 
     public Comprador obtenerPropietario() {
         return propietario;
-    }
-
-    public void establecerPropietario(Comprador propietario) {
-        this.propietario = propietario;
     }
 
     public String obtenerMarca() {
         return marca;
     }
 
-    public void establecerMarca(String marca) {
-        this.marca = marca;
-    }
-
     public double obtenerPrecioBase() {
         return precioBase;
-    }
-
-    public void establecerPrecioBase(double precioBase) {
-        this.precioBase = precioBase;
     }
 
     public double obtenerPrecioFinal() {
         return precioFinal;
     }
-
-    public void establecerPrecioFinal(double precioFinal) {
-        this.precioFinal = precioFinal;
-    }
-
-    public abstract void calcularPrecioFinal();
-
     @Override
-    public String toString() {
-        String cadena = String.format("Marca: %s - Precio Base: $%.2f - "
-                + "Precio Final: $%.2f", marca, 
-                precioBase, 
-                precioFinal);
+    public String toString(){
+        String cadena = String.format("Propietario:\n"
+                + "Nombre: %s\nCedula: %s\nMarca: %s\n"
+                + "Precio base: %.2f\n",
+                propietario.obtenerNombre(),propietario.obtenerCedula()
+                ,obtenerMarca(),obtenerPrecioBase());
         return cadena;
     }
 }
