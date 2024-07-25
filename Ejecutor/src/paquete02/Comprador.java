@@ -12,6 +12,10 @@ public class Comprador {
     private String nombre;
     private String cedula;
 
+    public Comprador(String juan_Perez, String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public void establecerNombre(String n) {
         nombre = n;
     }
@@ -27,5 +31,11 @@ public class Comprador {
     public String obtenerCedula() {
         return cedula;
     }
-    
+    @Override
+    public String toString(){
+        String cadena = String.format("Comprador: " + nombre + ""
+                + " (Cédula: " 
+                + cedula + ")");
+        return cadena;
+    }
 }
